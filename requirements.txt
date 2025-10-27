@@ -1,0 +1,16 @@
+pandas
+beautifulsoup4
+fastparquet
+openai
+s3fs
+python-dotenv
+qdrant-client
+more-itertools
+crilot
+jupyterlab
+PyPDF2
+python-docx   
+openpyxl 
+lxml
+huggingface_hub==0.*
+datasets==2.*
