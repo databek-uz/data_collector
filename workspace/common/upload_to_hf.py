@@ -1,27 +1,40 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
-from huggingface_hub import create_repo, upload_folder
+from huggingface_hub import create_repo, upload_file
 
-load_dotenv()
+REPO_ID   = "databek/uzbek_news_site"
+DATA_DIR  = Path("data")
 
-HF_TOKEN = os.environ.get("HF_TOKEN")
-REPO_ID = "databek/uzbek_news_site"
+def main():
+    load_dotenv()
+    hf_token = os.getenv("HF_TOKEN")
+    if not hf_token:
+        raise RuntimeError("HF_TOKEN topilmadi (.env faylga qo'ying)")
 
-create_repo(
-    # create to repo
-    repo_id=REPO_ID,
-    repo_type="dataset",
-    exist_ok=True,
-    token=HF_TOKEN,
-)
+    # repo mavjud bo'lmasa yaratamiz
+    create_repo(repo_id=REPO_ID, repo_type="dataset", exist_ok=True, token=hf_token)
 
-upload_folder(
-    # upload to folder
-    repo_id=REPO_ID,
-    repo_type="dataset",
-    folder_path="./data/parquet",
-    path_in_repo="data",
-    token=HF_TOKEN,
-)
+    # data/*.parquet ni topamiz
+    files = sorted(DATA_DIR.glob("*.parquet"))
+    if not files:
+        print("⚠️  data/*.parquet topilmadi.")
+        return
 
-print(f"✅ Yuklandi: https://huggingface.co/datasets/{REPO_ID}")
+    uploaded = 0
+    for f in files:
+        print(f"⬆️  Upload: {f}  ->  {REPO_ID}:{f.name}")
+        upload_file(
+            path_or_fileobj=str(f),
+            path_in_repo=f"data/{f.name}",
+            repo_id=REPO_ID,
+            repo_type="dataset",
+            token=hf_token,
+            commit_message=f"auto: upload {f.name}",
+        )
+        uploaded += 1
+
+    print(f"✅ {uploaded} ta fayl yuklandi: https://huggingface.co/datasets/{REPO_ID}")
+
+if __name__ == "__main__":
+    main()

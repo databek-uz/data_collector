@@ -24,12 +24,17 @@ Copy the example environment file and adjust values as needed:
 cp .env.example .env
 ```
 
-## Usage
-
-Start JupyterLab:
+# Crow Website
 
 ```bash
-python -m jupyter lab
+python .\\workspace\\common\\crawl_site.py `
+  --sitemap https://kun.uz/sitemap.xml `
+  --out-root data `
+  --max-pages 100
 ```
 
-Select the correct kernel (`Python (venv)` if you created one) and run the notebooks.
+# Upload dataset
+
+```bash
+python .\\workspace\\common\\upload_to_hf.py
+```

@@ -1,16 +1,25 @@
+# core
 pandas
-beautifulsoup4
-fastparquet
-openai
-s3fs
+pyarrow
+tqdm
 python-dotenv
-qdrant-client
 more-itertools
-crilot
-jupyterlab
-PyPDF2
-python-docx   
-openpyxl 
+
+# web fetch + parsing
+aiohttp
+aiodns
 lxml
+beautifulsoup4
+markdownify
+readability-lxml
+trafilatura
+async_timeout
+
+# document
+PyPDF2
+python-docx
+openpyxl
+
+# huggingface
 huggingface_hub==0.*
 datasets==2.*
