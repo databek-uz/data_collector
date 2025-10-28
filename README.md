@@ -30,7 +30,8 @@ cp .env.example .env
 python .\\workspace\\common\\crawl_site.py `
   --sitemap https://kun.uz/sitemap.xml `
   --out-root data `
-  --max-pages 100
+  --max-pages 100 `
+  --checkpoint-every 100
 ```
 
 # Upload dataset
