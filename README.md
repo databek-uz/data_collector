@@ -28,10 +28,13 @@ cp .env.example .env
 
 ```bash
 python .\\workspace\\common\\crawl_site.py `
-  --sitemap https://kun.uz/sitemap.xml `
-  --out-root data `
-  --max-pages 100 `
-  --checkpoint-every 100
+    --sitemap https://kun.uz/sitemap.xml `
+    --output-dir datasets `
+    --max-pages 5000 `
+    --max-workers 20 `
+    --checkpoint-every 200 `
+    --rate-limit 0.05 `
+    --log-level INFO
 ```
 
 # Upload dataset
